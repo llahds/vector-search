@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using VectorSearch.Common.Vectors;
 
-var path = @"<path to extract 7z file>";
+var path = @"<path to extracted 7z file>";
 
 using (var store = new SparseVectorStore(Path.Combine(path, "enron-vectors.dat")))
 {
@@ -13,7 +13,7 @@ using (var store = new SparseVectorStore(Path.Combine(path, "enron-vectors.dat")
     {
         stopwatch.Restart();
         var s0 = reader.Query(new SparseVectorQuery { Query = v.Vector });
-        stopwatch.Stop();
-        Console.WriteLine($"{stopwatch.ElapsedMilliseconds}ms");
+        stopwatch.Stop();        
+        Console.WriteLine($"Actual: {v.DocumentId}, Guess: {s0[0].documentId}, Score: {s0[0].score}, Time: {stopwatch.ElapsedMilliseconds}ms");
     }
 }
